@@ -508,60 +508,106 @@
             border-radius: 4px;
         }
 
-        /* Dashboard tool images */
-        .dashboard-tool-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 24px;
-            margin-top: 24px;
-        }
-
-        .dashboard-tool {
-            background-color: white;
+        /* Framework tool thumbnails and modal */
+        .tool-thumbnail {
+            margin-top: 16px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            overflow: hidden;
+            transition: var(--transition);
+            max-width: 300px;
+        }
+        
+        .tool-thumbnail:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+        
+        .thumbnail-img {
+            width: 100%;
+            height: auto;
+            display: block;
             transition: var(--transition);
         }
-
-        .dashboard-tool:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        
+        .view-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 8px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: var(--transition);
+            text-align: center;
         }
-
-        .dashboard-tool-img {
+        
+        .tool-thumbnail:hover .view-label {
+            opacity: 1;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
             width: 100%;
-            height: auto;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            opacity: 1;
+        }
+        
+        .modal-content {
+            margin: auto;
             display: block;
+            max-width: 90%;
+            max-height: 90%;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
         }
-
-        .dashboard-tool-content {
-            padding: 16px;
+        
+        .modal.show .modal-content {
+            transform: scale(1);
         }
-
-        .dashboard-tool-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--primary);
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
         }
-
-        .dashboard-tool-description {
-            font-size: 0.9rem;
-            color: var(--text);
-        }
-
-        .tool-preview {
-            width: 100%;
-            border-radius: var(--border-radius);
-            margin-bottom: 24px;
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-        }
-
-        .tool-preview img {
-            width: 100%;
-            height: auto;
+        
+        #modalCaption {
+            margin: auto;
             display: block;
+            width: 80%;
+            max-width: 700px;
+            text-align: center;
+            color: white;
+            padding: 10px 0;
+            height: 150px;
+            font-size: 1.2rem;
+        }
+        
+        /* Tool card styles */
+        .tool-card {
+            cursor: pointer;
         }
 
         /* Footer */
@@ -838,118 +884,129 @@
                     </div>
                 </div>
 
-                <h3 class="card-title" style="margin-top: 40px">Dashboard Tools Preview</h3>
-                
-                <div class="dashboard-tool-grid">
-                    <div class="dashboard-tool">
-                        <img src="https://images4.imagebam.com/b3/96/07/ME10W6J2_o.png" alt="Critical Success Factors" class="dashboard-tool-img">
-                        <div class="dashboard-tool-content">
-                            <h4 class="dashboard-tool-title">Critical Success Factors</h4>
-                            <p class="dashboard-tool-description">Identifies key factors determining negotiation success with visual metrics.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="dashboard-tool">
-                        <img src="https://images4.imagebam.com/59/c6/da/ME10W6J3_o.png" alt="Radical Faction Analysis" class="dashboard-tool-img">
-                        <div class="dashboard-tool-content">
-                            <h4 class="dashboard-tool-title">Radical Faction Analysis</h4>
-                            <p class="dashboard-tool-description">Evaluates potentially disruptive actors and mitigation strategies.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="dashboard-tool">
-                        <img src="https://images4.imagebam.com/f4/0d/c0/ME10W6J4_o.png" alt="Tactical Timeline" class="dashboard-tool-img">
-                        <div class="dashboard-tool-content">
-                            <h4 class="dashboard-tool-title">Tactical Timeline</h4>
-                            <p class="dashboard-tool-description">Structures negotiation approach through critical timeframes with phase-based planning.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="dashboard-tool">
-                        <img src="https://images4.imagebam.com/51/6f/dc/ME10W6J5_o.png" alt="Multiparty Dynamics" class="dashboard-tool-img">
-                        <div class="dashboard-tool-content">
-                            <h4 class="dashboard-tool-title">Multiparty Dynamics</h4>
-                            <p class="dashboard-tool-description">Maps complex stakeholder relationships and coalition-building opportunities.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="dashboard-tool-grid" style="margin-top: 24px;">
-                    <div class="dashboard-tool">
-                        <img src="https://images4.imagebam.com/fe/22/71/ME10W6J6_o.png" alt="Influence Pathways" class="dashboard-tool-img">
-                        <div class="dashboard-tool-content">
-                            <h4 class="dashboard-tool-title">Influence Pathways</h4>
-                            <p class="dashboard-tool-description">Visualizes key relationships and channels based on stakeholder positions.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="dashboard-tool">
-                        <img src="https://images4.imagebam.com/fe/b0/ef/ME10W6J7_o.png" alt="Stakeholder Matrix" class="dashboard-tool-img">
-                        <div class="dashboard-tool-content">
-                            <h4 class="dashboard-tool-title">Stakeholder Matrix</h4>
-                            <p class="dashboard-tool-description">Maps stakeholders by power, legitimacy, and urgency to prioritize focus.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="dashboard-tool">
-                        <img src="https://images4.imagebam.com/0b/dc/0c/ME10W6J8_o.png" alt="Iceberg Analysis" class="dashboard-tool-img">
-                        <div class="dashboard-tool-content">
-                            <h4 class="dashboard-tool-title">Iceberg Analysis</h4>
-                            <p class="dashboard-tool-description">Reveals underlying interests beneath stated positions to identify shared space.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="dashboard-tool">
-                        <img src="https://images4.imagebam.com/8e/7b/a0/ME10W6J9_o.png" alt="Island of Agreements" class="dashboard-tool-img">
-                        <div class="dashboard-tool-content">
-                            <h4 class="dashboard-tool-title">Island of Agreements</h4>
-                            <p class="dashboard-tool-description">Identifies starting points for dialogue through convergence mapping.</p>
-                        </div>
-                    </div>
-                </div>
+
 
                 <h3 class="card-title" style="margin-top: 40px">Integrated Negotiation Frameworks</h3>
                 
                 <div class="card">
-                    <div class="framework-card">
+                    <div class="framework-card tool-card" data-img="https://images4.imagebam.com/8e/7b/a0/ME10W6J9_o.png">
                         <div class="framework-icon">
                             <i class="far fa-compass"></i>
                         </div>
                         <div class="framework-content">
                             <div class="framework-title">Island of Agreements</div>
                             <p>This framework identifies potential starting points for dialogue by mapping areas of convergence and divergence between parties. It sorts negotiation elements into facts vs. norms and establishes positive points of departure.</p>
+                            <div class="tool-thumbnail">
+                                <img src="https://images4.imagebam.com/8e/7b/a0/ME10W6J9_o.png" alt="Island of Agreements" class="thumbnail-img">
+                                <span class="view-label">Click to enlarge</span>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="framework-card">
+                    <div class="framework-card tool-card" data-img="https://images4.imagebam.com/0b/dc/0c/ME10W6J8_o.png">
                         <div class="framework-icon">
                             <i class="far fa-snowflake"></i>
                         </div>
                         <div class="framework-content">
                             <div class="framework-title">Iceberg Analysis</div>
                             <p>Visual tool that reveals underlying interests beneath stated positions. It analyzes visible positions (what), reasoning (how), and the deeper motives and values (why) driving both parties in the negotiation.</p>
+                            <div class="tool-thumbnail">
+                                <img src="https://images4.imagebam.com/0b/dc/0c/ME10W6J8_o.png" alt="Iceberg Analysis" class="thumbnail-img">
+                                <span class="view-label">Click to enlarge</span>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="framework-card">
+                    <div class="framework-card tool-card" data-img="https://images4.imagebam.com/fe/22/71/ME10W6J6_o.png">
                         <div class="framework-icon">
                             <i class="far fa-share-alt"></i>
                         </div>
                         <div class="framework-content">
                             <div class="framework-title">Influence Pathways</div>
                             <p>A graphical and narrative representation of power relationships and influence dynamics. It maps stakeholders on a 2D grid to develop quadrant-based engagement strategies and identify key influence channels.</p>
+                            <div class="tool-thumbnail">
+                                <img src="https://images4.imagebam.com/fe/22/71/ME10W6J6_o.png" alt="Influence Pathways" class="thumbnail-img">
+                                <span class="view-label">Click to enlarge</span>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="framework-card" style="margin-bottom: 0;">
+                    <div class="framework-card tool-card" data-img="https://images4.imagebam.com/fe/b0/ef/ME10W6J7_o.png">
                         <div class="framework-icon">
-                            <i class="far fa-project-diagram"></i>
+                            <i class="far fa-table"></i>
                         </div>
                         <div class="framework-content">
-                            <div class="framework-title">Scenario Design</div>
-                            <p>A method for visually simulating negotiation trajectories under different conditions or assumptions. It maps position boundaries and identifies potential agreement zones for complex negotiations.</p>
+                            <div class="framework-title">Stakeholder Matrix</div>
+                            <p>Maps key stakeholders by their power, legitimacy, and urgency to help prioritize negotiation focus. Provides a structured view of stakeholder positions, priorities, and actions needed.</p>
+                            <div class="tool-thumbnail">
+                                <img src="https://images4.imagebam.com/fe/b0/ef/ME10W6J7_o.png" alt="Stakeholder Matrix" class="thumbnail-img">
+                                <span class="view-label">Click to enlarge</span>
+                            </div>
                         </div>
                     </div>
+                    
+                    <div class="framework-card tool-card" data-img="https://images4.imagebam.com/51/6f/dc/ME10W6J5_o.png">
+                        <div class="framework-icon">
+                            <i class="far fa-users"></i>
+                        </div>
+                        <div class="framework-content">
+                            <div class="framework-title">Multiparty Dynamics</div>
+                            <p>Maps complex stakeholder relationships and identifies potential coalition-building opportunities. Helps understand group dynamics and formulate effective engagement strategies across different stakeholder coalitions.</p>
+                            <div class="tool-thumbnail">
+                                <img src="https://images4.imagebam.com/51/6f/dc/ME10W6J5_o.png" alt="Multiparty Dynamics" class="thumbnail-img">
+                                <span class="view-label">Click to enlarge</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="framework-card tool-card" data-img="https://images4.imagebam.com/f4/0d/c0/ME10W6J4_o.png">
+                        <div class="framework-icon">
+                            <i class="far fa-clock"></i>
+                        </div>
+                        <div class="framework-content">
+                            <div class="framework-title">Tactical Timeline</div>
+                            <p>Structures negotiation approach through critical timeframes with phase-based planning. Creates a clear roadmap for progressive engagement with key milestones and specific objectives for each stage of the negotiation process.</p>
+                            <div class="tool-thumbnail">
+                                <img src="https://images4.imagebam.com/f4/0d/c0/ME10W6J4_o.png" alt="Tactical Timeline" class="thumbnail-img">
+                                <span class="view-label">Click to enlarge</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="framework-card tool-card" data-img="https://images4.imagebam.com/59/c6/da/ME10W6J3_o.png">
+                        <div class="framework-icon">
+                            <i class="far fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="framework-content">
+                            <div class="framework-title">Radical Faction Analysis</div>
+                            <p>Focuses on managing small but influential radical factions that could potentially derail negotiations. Provides characterization, management strategies, and risk assessment matrices for dealing with disruptive elements.</p>
+                            <div class="tool-thumbnail">
+                                <img src="https://images4.imagebam.com/59/c6/da/ME10W6J3_o.png" alt="Radical Faction Analysis" class="thumbnail-img">
+                                <span class="view-label">Click to enlarge</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="framework-card tool-card" data-img="https://images4.imagebam.com/b3/96/07/ME10W6J2_o.png" style="margin-bottom: 0;">
+                        <div class="framework-icon">
+                            <i class="far fa-check-circle"></i>
+                        </div>
+                        <div class="framework-content">
+                            <div class="framework-title">Critical Success Factors</div>
+                            <p>Identifies key factors that will determine successful resolution of the crisis. Uses visual metrics to track stakeholder trust, alignment, and negotiation process effectiveness while providing targeted recommendations for improvement.</p>
+                            <div class="tool-thumbnail">
+                                <img src="https://images4.imagebam.com/b3/96/07/ME10W6J2_o.png" alt="Critical Success Factors" class="thumbnail-img">
+                                <span class="view-label">Click to enlarge</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Image Modal -->
+                <div id="imageModal" class="modal">
+                    <span class="modal-close">&times;</span>
+                    <img class="modal-content" id="modalImage">
+                    <div id="modalCaption"></div>
                 </div>
             </div>
 
@@ -1420,6 +1477,69 @@
             // Run on load and scroll
             window.addEventListener('load', animateOnScroll);
             window.addEventListener('scroll', animateOnScroll);
+            
+            // Modal functionality
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            const closeBtn = document.querySelector('.modal-close');
+            
+            // Get all framework cards with tool images
+            const toolCards = document.querySelectorAll('.tool-card');
+            const toolThumbnails = document.querySelectorAll('.tool-thumbnail');
+            
+            // When the user clicks on a tool card or thumbnail, open the modal
+            function openModal(imgSrc, title) {
+                modal.style.display = 'block';
+                modalImg.src = imgSrc;
+                modalCaption.innerHTML = title;
+                
+                // Add 'show' class after a small delay to trigger animation
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+                
+                // Prevent scrolling on body
+                document.body.style.overflow = 'hidden';
+            }
+            
+            toolCards.forEach(card => {
+                const thumbnail = card.querySelector('.tool-thumbnail');
+                const img = card.querySelector('.thumbnail-img');
+                const title = card.querySelector('.framework-title').textContent;
+                
+                thumbnail.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openModal(img.src, title);
+                });
+            });
+            
+            // When the user clicks on the close button or anywhere outside the image, close the modal
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal function
+            function closeModal() {
+                modal.classList.remove('show');
+                
+                // Wait for animation to complete before hiding
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    // Re-enable scrolling on body
+                    document.body.style.overflow = 'auto';
+                }, 300);
+            }
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.style.display === 'block') {
+                    closeModal();
+                }
+            });
         });
     </script>
 </body>
